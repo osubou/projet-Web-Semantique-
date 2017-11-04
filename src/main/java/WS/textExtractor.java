@@ -19,8 +19,9 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Fe
 public class textExtractor {
     private static NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(
                 NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
-                "901b18f3-9e37-4153-b659-0833905301e9",
-                "qAbQygtbrJ1W");
+                 "username",
+                 "password");
+                
     private static  EntitiesOptions entities = new EntitiesOptions.Builder().limit(1).sentiment(true).build();
     private static  ConceptsOptions concepts = new ConceptsOptions.Builder()
                 .limit(5)
