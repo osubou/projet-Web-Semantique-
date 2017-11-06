@@ -21,10 +21,17 @@ public class googleQuery {
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0 Chrome/61.0.3163.100 Safari/537.36";
     //public static final String USER_AGENT = "Mozilla/4.0";
    
-    public static List<String> getUrls(String query) throws IOException{
+    public static List<String> getUrls(String userQuery,int offset) throws IOException{
+        String query = queryFormat.queryToURL(userQuery);
         List<String> l  = new ArrayList<>();
         int i=0;
-        Document doc = Jsoup.connect("https://google.fr/search?q="+query).userAgent(USER_AGENT).get();
+        String URL;
+        if(offset>0){
+            URL = "https://google.fr/search?q="+query+"&start="+offset;
+        }else{
+            URL = "https://google.fr/search?q="+query;
+        }
+        Document doc = Jsoup.connect(URL).userAgent(USER_AGENT).get();
          for (Element result : doc.select("h3.r  a") ){ 
            i =i+1;
             String title = result.text();
@@ -39,6 +46,6 @@ public class googleQuery {
     
       public static void main(String[] args) throws Exception {
        
-        getUrls("Matrix");
+        getUrls("cloud atlas",10);
      }
 }
